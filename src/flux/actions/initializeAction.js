@@ -1,7 +1,7 @@
 "use strict";
 
 var Dispatcher = require('../dispatcher/appDispatcher');
-var AuthorApi = require('../../api/chatApi');
+var ChatApi = require('../../api/chatApi');
 var ActionTypes = require('../constants/actionTypes');
 
 var InitializeActions = {
@@ -11,7 +11,8 @@ var InitializeActions = {
 		Dispatcher.dispatch({
 			actionType:  ActionTypes.INITIALIZE,
 			initialData: {
-				authors: AuthorApi.getAllAuthors()
+				groups: ChatApi.getAllGroups(),
+				participant: ChatApi.getActiveParticipant()
 			}
 		});
 	}

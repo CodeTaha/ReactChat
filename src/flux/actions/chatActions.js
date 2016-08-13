@@ -5,6 +5,20 @@ var ChatApi = require('../../api/chatApi');
 var ActionTypes = require('../constants/actionTypes');
 
 var ChatActions = {
+	selectGroup: function(groupId, fetchData) {
+		var chat='';
+		if(fetchData) {
+			chat = ChatApi.getChatsById(groupId);
+		}
+		// Dispatcher tells all the stores that
+		// an author has just been created
+		Dispatcher.dispatch({
+			actionType:  ActionTypes.SELECTGROUP,
+			chat: chat,
+			groupId: groupId,
+			fetchData: fetchData,
+		});
+	}
 	/*
 	createAuthor: function(author) {
 		var newAuthor = AuthorApi.saveAuthor(author);

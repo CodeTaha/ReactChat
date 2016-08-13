@@ -7,14 +7,17 @@ $ = jQuery = require('jquery');
 var toastr = require('toastr');
 var _ = require('lodash');
 var ChatApi = require('../api/chatApi');
-//var ChatActions = require('../flux/actions/chatActions');
-//var ChatStore = require('../flux/store/chatStore');
 
+// Flux
+var ChatActions = require('../flux/actions/chatActions');
+var ChatStore = require('../flux/store/chatStore');
+
+// JSX files
 var Header = require('./common/header.jsx');
 var ChatList = require('./chat_module/chatList.jsx');
 var ChatDetail = require('./chat_module/chatDetail.jsx');
 
-var _message = function(){
+var _clearMessage = function(){
 	var message = {
 				media: false,
 				mediaParams: {
@@ -31,16 +34,27 @@ var App = React.createClass({
 	getInitialState: function() {
 		//console.log(ChatApi.getActiveParticipant())
 		return {
-			groups: ChatApi.getAllGroups(),
+			//groups: ChatApi.getAllGroups(),
+			groups: ChatStore.getAllGroups(),
 			chats: {},
-			selectedGroup:{
-				groupName: '',
-				groupId: '',
-				//chats:[]
-			},
-			message: _message(),
-			participant: ChatApi.getActiveParticipant()
+			selectedGroup: ChatStore.getSelectedGroup(),
+			message: _clearMessage(),
+			participant: ChatStore.getActiveParticipant()
 		};
+	},
+
+	componentWillMount: function() {
+	      ChatStore.addChangeListener(this._onChange);
+	},
+
+	componentWillUnmount: function() {
+	      ChatStore.removeChangeListener(this._onChange);
+	},
+
+	_onChange: function() {
+		//debugger;
+		this.setState({ chats: ChatStore.getChats()});
+		this.setState({ selectedGroup: ChatStore.getSelectedGroup()});
 	},
 
 	// When a group is selected from ChatList
@@ -48,36 +62,35 @@ var App = React.createClass({
 		event.preventDefault();
 		//console.log("selectGroup",id);
 		if(this.state.message.text.length>0){
-			// Notifies for for unsent message
+			// Notifies if there is an unsent message
 			if(!confirm('You have an unsent message which will be lost?')){
 				return;
 			} else {
-				this.state.message.text='';
-				this.setState({message:this.state.message})
+				// clear message
+				this.setState({message:_clearMessage()})
 			}
 		}
+		//ChatStore.selectGroup(id);
+		
 		if(this.state.chats[id] === undefined){
 			// to reduce server calls
-			var chats = this.state.chats;
+			// data is requested only when needed
+			// and cached
+			/*var chats = this.state.chats;
 			chats[id] = ChatApi.getChatsById(id);
-			this.setState({chats: chats});
-			//console.log("data received",this.state.chats,this.state.selectedGroup)
+			this.setState({chats: chats});*/
+			ChatActions.selectGroup(id, true);
+		} else {
+			ChatActions.selectGroup(id, false);
 		}
-		var selectedGroup = this.state.selectedGroup;
+		/*var selectedGroup = this.state.selectedGroup;
 		var group = ChatApi.getGroupById(id);
 		selectedGroup.groupName = group.groupName;
 		selectedGroup.groupId = group.id;
 		//selectedGroup.chats = this.state.chats[id];
 		this.setState({
 			selectedGroup: selectedGroup
-		});
-		//console.log("Cached")
-	
-		//console.log(this.state.selectedGroup)
-		
-		//debugger;
-		//AuthorActions.deleteAuthor(id);
-		//toastr.success('Author Deleted');
+		});*/
 	},
 
 	// When message is typed
@@ -106,7 +119,7 @@ var App = React.createClass({
 		ChatApi.sendMessage(this.state.message, function(){
 			self.state.chats[self.state.message.groupId] = ChatApi.getChatsById(self.state.message.groupId);
 			self.setState({chats:self.state.chats});
-			self.setState({message:_message()});
+			self.setState({message:_clearMessage()});
 			toastr.success('Message Sent');
 		});
 		//console.log(this.state.message)
