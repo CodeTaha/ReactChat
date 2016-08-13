@@ -1,7 +1,13 @@
 "use strict";
 var React = require('react');
-
+var $ = require('jquery');
 var ChatDetail = React.createClass({
+	componentDidUpdate: function() {
+		console.log("lala")
+		$(".panel-body").animate({ scrollTop: $(document).height() }, "slow");
+		/*var node = document.getElementById('panelBody');
+		node.scrollTop = node.scrollHeight;*/
+	},
 	propTypes: {
 		// Checks if prop is passed by the Parent component
 		selectedGroup: React.PropTypes.object.isRequired,
@@ -23,7 +29,7 @@ var ChatDetail = React.createClass({
 			var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
 			//console.log(a,time);
 			// Generating a unique key for iteration
-			var key = mesg.participant.id + mesg.timestamp;
+			var key = mesg.participant.id + mesg.timestamp + (Math.random() * (1000 - 1) + 1);
 			if(mesg.participant.id===this.props.participant.id){
 				return (
 					<li key={key} className="right clearfix">
@@ -78,28 +84,30 @@ var ChatDetail = React.createClass({
                     <span className="glyphicon glyphicon-comment"></span> 
                     {' '+ this.props.selectedGroup.groupName}
                 </div>
-                <div className="panel-body">
+                <div id="panelBody" className="panel-body">
                     <ul className="chat">
 						{this.props.chats[this.props.selectedGroup.groupId].map(createChatLi,this)}
                     </ul>
                 </div>
                 <div className="panel-footer">
-                    <div className="input-group">
-                        <input id="btn-input" type="text" className="form-control input-sm" placeholder="Type your message here..."
-							name='message'
-							ref='message'
-							onChange={this.props.onChange}
-							value={this.props.message.text}
-                        />
-                        <span className="input-group-btn">
-                            <button 
-								onClick={this.props.onSend}
-								className="btn btn-warning btn-sm" id="btn-chat"
-                            >
-                                Send
-                            </button>
-                        </span>
-                    </div>
+                	<form>
+	                    <div className="input-group">
+	                        <input id="btn-input" type="text" className="form-control input-sm" placeholder="Type your message here..."
+								name='message'
+								ref='message'
+								onChange={this.props.onChange}
+								value={this.props.message.text}
+	                        />
+	                        <span className="input-group-btn">
+	                            <input 
+	                            	type="submit"
+	                            	value="Send"
+									onClick={this.props.onSend}
+									className="btn btn-warning btn-sm" id="btn-chat"
+	                            />
+	                        </span>
+	                    </div>
+	                </form>
                 </div>
             </div>
 			

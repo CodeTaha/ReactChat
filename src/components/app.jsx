@@ -109,7 +109,7 @@ var App = React.createClass({
 			self.setState({message:_message()});
 			toastr.success('Message Sent');
 		});
-		console.log(this.state.message)
+		//console.log(this.state.message)
 	},
 
 	render: function() {
