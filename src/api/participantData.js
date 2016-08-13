@@ -3,7 +3,7 @@ module.exports = {
 		me: { 
 			id: 'me',
 			primary: true, 
-			name: 'Halloween', 
+			name: 'Taha', 
 		},
 		john: { 
 			id: 'john',
@@ -23,7 +23,7 @@ module.exports = {
 		dan: { 
 			id: 'dan',
 			primary: false, 
-			name: 'Dan Wahlin', 
+			name: 'Dan', 
 		}
 	}
 };

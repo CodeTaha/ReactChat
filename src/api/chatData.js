@@ -4,78 +4,78 @@ module.exports = {
 		grp1: [ 
 			{
 				media:false,
-				test: 'Hey!! whatsup',
-				timestamp:'2016-01-15T17:24:07.041Z',
+				text: 'Hey!! whatsup',
+				timestamp:1470206521,
 				participant: participants.me
 			},
 			{
 				media:false,
-				test: 'Fine',
-				timestamp:'2016-07-07T03:49:46.334Z',
+				text: 'Fine',
+				timestamp:1465755826,
 				participant: participants.john
 			},
 			{
 				media:false,
-				test: 'Hello',
-				timestamp:'2016-06-23T03:38:04.724Z',
+				text: 'Hello',
+				timestamp:1455221006,
 				participant: participants.jack
 			},
 			{
 				media:false,
-				test: 'Kiitos',
-				timestamp:'2016-05-29T07:17:13.650Z',
+				text: 'Kiitos',
+				timestamp:1457098523,
 				participant: participants.simon
 			},
 			{
 				media:false,
-				test: 'I am Batman',
-				timestamp:'2016-03-11T09:23:58.353Z',
+				text: 'I am Batman',
+				timestamp:1464411428,
 				participant: participants.me
 			},
 			{
 				media:false,
-				test: 'Oh God!!',
-				timestamp:'2016-05-23T12:57:44.971Z',
+				text: 'Oh God!!',
+				timestamp:1465755826,
 				participant: participants.jack
 			},
 		],
 		grp2: [ 
 			{
 				media:false,
-				test: 'Hey!! Jack',
-				timestamp:'2016-01-15T17:24:07.041Z',
+				text: 'Hey!! Jack',
+				timestamp:1465755826,
 				participant: participants.me
 			},
 			{
 				media:false,
-				test: 'Howdy Taha',
-				timestamp:'2016-07-07T03:49:46.334Z',
+				text: 'Howdy Taha',
+				timestamp:1455221006,
 				participant: participants.john
 			},
 			{
 				media:false,
-				test: 'Dont you worry about Jack',
-				timestamp:'2016-06-23T03:38:04.724Z',
+				text: 'Dont you worry about Jack',
+				timestamp:1470206521,
 				participant: participants.me
 			}
 		],
 		dan: [ 
 			{
 				media:false,
-				test: 'whatsup Dan',
-				timestamp:'2016-01-15T17:24:07.041Z',
+				text: 'whatsup Dan',
+				timestamp:1465755826,
 				participant: participants.me
 			},
 			{
 				media:false,
-				test: 'Got work to do',
-				timestamp:'2016-07-07T03:49:46.334Z',
+				text: 'Got work to do',
+				timestamp:1470206521,
 				participant: participants.dan
 			},
 			{
 				media:false,
-				test: 'Halleluyah',
-				timestamp:'2016-06-23T03:38:04.724Z',
+				text: 'Halleluyah',
+				timestamp:1460779400,
 				participant: participants.dan
 			}
 		]

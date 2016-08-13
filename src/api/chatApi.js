@@ -3,6 +3,7 @@
 //This file is mocking a web API by hitting hard coded data.
 var groups = require('./groupData').groups;
 var chats = require('./chatData').chats;
+var participants = require('./participantData').participants;
 var _ = require('lodash');
 
 //This would be performed on the server in a real app. Just stubbing in.
@@ -17,6 +18,14 @@ var _clone = function(item) {
 	return JSON.parse(JSON.stringify(item)); //return cloned copy so that the item is passed by value instead of by reference
 };
 
+var compare = function(a,b) {
+  if (a.timestamp < b.timestamp)
+    return -1;
+  if (a.timestamp > b.timestamp)
+    return 1;
+  return 0;
+}
+
 var chatApi = {
 	getAllGroups: function() {
 		return _clone(groups); 
@@ -26,7 +35,26 @@ var chatApi = {
 		var group = _.find(groups, {id: id});
 		return _clone(group);
 	},
+
+	getChatsById: function(groupId) {
+		//var group = _.find(groups, {id: groupId});
+		var chat = chats[groupId];
+		return _clone(chat);
+	},
 	
+	getActiveParticipant: function() {
+		// TODO make it randomized
+		var participant = _.find(participants, {primary: true});
+		return _clone(participant);
+	},
+
+	// When a message is sent
+	sendMessage: function(message, cb) {
+		console.log("Pretend message is sent");
+		chats[message.groupId].push(message);
+		cb();
+	},
+
 	saveGroup: function(group) {
 		// Todo saveGroup and create chat data
 		//pretend an ajax call to web api is made here

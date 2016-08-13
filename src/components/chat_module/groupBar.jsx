@@ -1,7 +1,6 @@
 "use strict";
 
 var React = require('react');
-var Link = require('react-router').Link;
 
 var toastr = require('toastr');
 
@@ -22,7 +21,7 @@ var GroupBar = React.createClass({
 
 	render: function() {
 		var createGroupRow = function(group) {
-			console.log(group)
+			//console.log(group)
 			return (
 				<a href="#" 
 					onClick={this.props.onClick.bind(null, group.id)} 
