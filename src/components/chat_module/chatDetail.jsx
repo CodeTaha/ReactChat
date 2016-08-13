@@ -1,12 +1,10 @@
 "use strict";
 var React = require('react');
-var $ = require('jquery');
 var ChatDetail = React.createClass({
 	componentDidUpdate: function() {
-		console.log("lala")
-		$(".panel-body").animate({ scrollTop: $(document).height() }, "slow");
-		/*var node = document.getElementById('panelBody');
-		node.scrollTop = node.scrollHeight;*/
+		//console.log("lala");
+		var node = document.getElementById('panelBody');
+		node.scrollTop = node.scrollHeight;
 	},
 	propTypes: {
 		// Checks if prop is passed by the Parent component
