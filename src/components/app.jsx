@@ -44,11 +44,11 @@ var App = React.createClass({
 	},
 
 	componentWillMount: function() {
-	      ChatStore.addChangeListener(this._onChange);
+		return ChatStore.addChangeListener(this._onChange);
 	},
 
 	componentWillUnmount: function() {
-	      ChatStore.removeChangeListener(this._onChange);
+		return ChatStore.removeChangeListener(this._onChange);
 	},
 
 	_onChange: function() {
@@ -56,7 +56,7 @@ var App = React.createClass({
 		/*this.setState({ chats: ChatStore.getChats()});
 		this.setState({ selectedGroup: ChatStore.getSelectedGroup()});
 		this.setState({message:_clearMessage()});*/
-		this.setState({
+		return this.setState({
 			chats: ChatStore.getChats(),
 			selectedGroup: ChatStore.getSelectedGroup(),
 			message:_clearMessage()
@@ -67,8 +67,8 @@ var App = React.createClass({
 	selectGroup: function(id,event){
 		event.preventDefault();
 		//console.log("selectGroup",id);
-		if(this.state.message.text.length>0){
-			// Notifies if there is an unsent message
+		if(this.state.message.text.length>0 || this.state.message.media===true){
+			// Notifies if there is an unsent message or attached image
 			if(!confirm('You have an unsent message which will be lost?')){
 				return;
 			}
@@ -78,9 +78,9 @@ var App = React.createClass({
 			// to reduce server calls
 			// full data is requested only when needed
 			// else cached
-			ChatActions.selectGroup(id, true);
+			return ChatActions.selectGroup(id, true);
 		} else {
-			ChatActions.selectGroup(id, false);
+			return ChatActions.selectGroup(id, false);
 		}
 	},
 
@@ -128,6 +128,7 @@ var App = React.createClass({
 			} else {
 				toastr.error("Sorry!! Sending Message failed");
 			}
+			return null;
 		});
 	},
 
@@ -136,7 +137,6 @@ var App = React.createClass({
 			<div>
 				<Header />
 				<div className="container-fluid">
-					{/*<RouteHandler />*/}
 					<div className="row">
 						<div className="col-md-4">
 							<ChatList 

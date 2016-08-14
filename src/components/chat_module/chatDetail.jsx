@@ -1,13 +1,16 @@
 "use strict";
 var React = require('react');
-
 var ChatInput = require('./chatInput.jsx');
+var ReactEmoji = require('react-emoji');
 var ChatDetail = React.createClass({
 	componentDidUpdate: function() {
 		//console.log("lala");
 		var node = document.getElementById('panelBody');
 		node.scrollTop = node.scrollHeight;
 	},
+	mixins:[
+		ReactEmoji
+	],
 	propTypes: {
 		// Checks if prop is passed by the Parent component
 		selectedGroup: React.PropTypes.object.isRequired,
@@ -27,13 +30,13 @@ var ChatDetail = React.createClass({
 								src={mesg.mediaParams.path} 
 							/>
 							<br />
-							{mesg.text}		
+							{ ReactEmoji.emojify(mesg.text) }		
 						</p>
 					);
 				}
 			}
 			return (
-				<p>{mesg.text}</p>
+				<p>{ ReactEmoji.emojify(mesg.text) }</p>
 			);
 		}
 		var createChatLi = function(mesg) {
@@ -51,6 +54,7 @@ var ChatDetail = React.createClass({
 			// Generating a unique key for iteration
 			var key = mesg.participant.id + mesg.timestamp + (Math.random() * (1000 - 1) + 1);
 			if(mesg.participant.id===this.props.participant.id){
+				// If sent by the Active participant
 				return (
 					<li key={key} className="right clearfix">
 						<span className="chat-img pull-right">
@@ -72,6 +76,7 @@ var ChatDetail = React.createClass({
 				);
 			}
 			return (
+				// If sent by other participants
 				<li key={key} className="left clearfix">
 					<span className="chat-img pull-left">
 						<img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" className="img-circle" />
@@ -95,10 +100,13 @@ var ChatDetail = React.createClass({
 			return (<div></div>);
 		}
 		return (
-			<div className="panel panel-info">
+			<div className="panel panel-primary">
                 <div className="panel-heading">
-                    <span className="glyphicon glyphicon-comment"></span> 
-                    {' '+ this.props.selectedGroup.groupName}
+                    
+					<h4>
+						<span className="glyphicon glyphicon-comment"></span> 
+						{' '+ this.props.selectedGroup.groupName}
+					</h4>
                 </div>
                 <div id="panelBody" className="panel-body">
                     <ul className="chat">

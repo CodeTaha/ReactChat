@@ -24,15 +24,6 @@ var ChatInput = React.createClass({
 						onChange={this.props.onChange}
 						value={this.props.message.text}
 					/>
-
-					{/*<input 
-						className="form-control"
-						type='file'
-						accept=".png,.gif,.jpg,.jpeg"
-						name='mediaPath'
-						onChange={this.props.onChange}
-						value=''
-					/>*/}
 					<span className="input-group-btn">
 						<span className="btn btn-default btn-sm btn-file">
 							<span className="glyphicon glyphicon-paperclip" aria-hidden="true">
@@ -60,8 +51,4 @@ var ChatInput = React.createClass({
 		);
 	}
 });
-/*
-						onChange={this.props.onChange}
-						value={this.props.message.mediaParams.path}
-*/
 module.exports = ChatInput;
