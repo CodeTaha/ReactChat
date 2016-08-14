@@ -49,7 +49,14 @@ var chatApi = {
 	},
 
 	// When a message is sent
-	sendMessage: function(message, cb) {
+	sendMessage: function(message, groupId) {
+		console.log("Pretend message is sent");
+		chats[groupId].push(message);
+		// can simulate failed messages here
+		return true;
+	},
+
+	sendMessage2: function(message, cb) {
 		console.log("Pretend message is sent");
 		chats[message.groupId].push(message);
 		cb();

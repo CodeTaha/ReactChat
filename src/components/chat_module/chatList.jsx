@@ -8,7 +8,8 @@ var ChatList = React.createClass({
 	propTypes: {
 		// Checks if prop is passed by the Parent component
 		groups: React.PropTypes.array.isRequired,
-		onClick: React.PropTypes.func.isRequired
+		onClick: React.PropTypes.func.isRequired,
+		selectedGroupId: React.PropTypes.string
 	},
 	render: function() {
 		return (
@@ -19,6 +20,7 @@ var ChatList = React.createClass({
 				<GroupBar 
 					groups={this.props.groups}
 					onClick={this.props.onClick}
+					selectedGroupId={this.props.selectedGroupId}
 				/>
 				</ul>
 			</div>

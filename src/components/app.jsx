@@ -6,7 +6,6 @@ var RouteHandler = require('react-router').RouteHandler;
 $ = jQuery = require('jquery');
 var toastr = require('toastr');
 var _ = require('lodash');
-var ChatApi = require('../api/chatApi');
 
 // Flux
 var ChatActions = require('../flux/actions/chatActions');
@@ -22,7 +21,10 @@ var _clearMessage = function(){
 				media: false,
 				mediaParams: {
 					type:'',
-					path:''
+					path:'',
+					file:{
+						name:''
+					}
 				},
 				text:'',
 				timestamp:null
@@ -32,9 +34,7 @@ var _clearMessage = function(){
 
 var App = React.createClass({
 	getInitialState: function() {
-		//console.log(ChatApi.getActiveParticipant())
 		return {
-			//groups: ChatApi.getAllGroups(),
 			groups: ChatStore.getAllGroups(),
 			chats: {},
 			selectedGroup: ChatStore.getSelectedGroup(),
@@ -53,8 +53,14 @@ var App = React.createClass({
 
 	_onChange: function() {
 		//debugger;
-		this.setState({ chats: ChatStore.getChats()});
+		/*this.setState({ chats: ChatStore.getChats()});
 		this.setState({ selectedGroup: ChatStore.getSelectedGroup()});
+		this.setState({message:_clearMessage()});*/
+		this.setState({
+			chats: ChatStore.getChats(),
+			selectedGroup: ChatStore.getSelectedGroup(),
+			message:_clearMessage()
+		});
 	},
 
 	// When a group is selected from ChatList
@@ -65,47 +71,50 @@ var App = React.createClass({
 			// Notifies if there is an unsent message
 			if(!confirm('You have an unsent message which will be lost?')){
 				return;
-			} else {
-				// clear message
-				this.setState({message:_clearMessage()})
 			}
 		}
-		//ChatStore.selectGroup(id);
 		
 		if(this.state.chats[id] === undefined){
 			// to reduce server calls
-			// data is requested only when needed
-			// and cached
-			/*var chats = this.state.chats;
-			chats[id] = ChatApi.getChatsById(id);
-			this.setState({chats: chats});*/
+			// full data is requested only when needed
+			// else cached
 			ChatActions.selectGroup(id, true);
 		} else {
 			ChatActions.selectGroup(id, false);
 		}
-		/*var selectedGroup = this.state.selectedGroup;
-		var group = ChatApi.getGroupById(id);
-		selectedGroup.groupName = group.groupName;
-		selectedGroup.groupId = group.id;
-		//selectedGroup.chats = this.state.chats[id];
-		this.setState({
-			selectedGroup: selectedGroup
-		});*/
 	},
 
 	// When message is typed
 	setMessageState: function(event) {
 		var field = event.target.name;
-		var value = event.target.value;
-		this.state.message.text = value;
-		//console.log(this.state.author)
-		return this.setState({message:this.state.message});
+		if(field==='mediaPath'){
+			console.log(event.target.files)
+			let reader = new FileReader();
+		    let file = event.target.files[0];
+
+		    reader.onloadend = () => {
+		    	//console.log(file,reader.result)
+		    	this.state.message.mediaParams.path = reader.result;
+		    	this.state.message.mediaParams.file = file;
+		    	this.state.message.media = true;
+		    	this.state.message.mediaParams.type = 'img';
+		    	//console.log(this.state.message)
+		    	toastr.success(this.state.message.mediaParams.file.name+" attached successfully");
+		    	return this.setState({message:this.state.message});
+		    }
+		    reader.readAsDataURL(file)
+		} else {
+			var value = event.target.value;
+			this.state.message[field] = value;
+			return this.setState({message:this.state.message});
+		}
+		
 	},
 
 	// When user sends a message
 	sendMessage: function(event){
 		event.preventDefault();
-		if(this.state.message.text.length===0){
+		if(this.state.message.text.length===0 && this.state.message.media===false){
 			return;
 		}
 		if(!this.state.message.media){
@@ -113,16 +122,13 @@ var App = React.createClass({
 		}
 		this.state.message.timestamp = Math.floor(Date.now() / 1000);
 		this.state.message.participant = this.state.participant;
-		this.state.message.groupId = this.state.selectedGroup.groupId;
-		this.setState({message:this.state.message});
-		var self = this;
-		ChatApi.sendMessage(this.state.message, function(){
-			self.state.chats[self.state.message.groupId] = ChatApi.getChatsById(self.state.message.groupId);
-			self.setState({chats:self.state.chats});
-			self.setState({message:_clearMessage()});
-			toastr.success('Message Sent');
+		ChatActions.sendMessage(this.state.message, this.state.selectedGroup.groupId, function(success){
+			if(success){
+				toastr.success("Message Sent Successfully!!")
+			} else {
+				toastr.error("Sorry!! Sending Message failed");
+			}
 		});
-		//console.log(this.state.message)
 	},
 
 	render: function() {
@@ -136,6 +142,7 @@ var App = React.createClass({
 							<ChatList 
 								groups={this.state.groups}
 								onClick={this.selectGroup}
+								selectedGroupId={this.state.selectedGroup.groupId}
 							/>
 						</div>
 						<div className="col-md-8">

@@ -15,10 +15,14 @@ module.exports = {
 				participant: participants.john
 			},
 			{
-				media:false,
-				text: 'Hello',
+				media:true,
+				text: 'Hello, check this Lion',
 				timestamp:1455221006,
-				participant: participants.jack
+				participant: participants.jack,
+				mediaParams: {
+					type: 'img',
+					path: 'images/chatData/lion.jpg'
+				}
 			},
 			{
 				media:false,
@@ -27,10 +31,14 @@ module.exports = {
 				participant: participants.simon
 			},
 			{
-				media:false,
+				media:true,
 				text: 'I am Batman',
 				timestamp:1464411428,
-				participant: participants.me
+				participant: participants.me,
+				mediaParams: {
+					type: 'img',
+					path: 'images/chatData/batman.jpg'
+				}
 			},
 			{
 				media:false,
@@ -53,10 +61,14 @@ module.exports = {
 				participant: participants.john
 			},
 			{
-				media:false,
+				media:true,
 				text: 'Dont you worry about Jack',
 				timestamp:1470206521,
-				participant: participants.me
+				participant: participants.me,
+				mediaParams: {
+					type: 'img',
+					path: 'images/chatData/tigers.jpg'
+				}
 			}
 		],
 		dan: [ 
@@ -73,10 +85,14 @@ module.exports = {
 				participant: participants.dan
 			},
 			{
-				media:false,
+				media:true,
 				text: 'Halleluyah',
 				timestamp:1460779400,
-				participant: participants.dan
+				participant: participants.dan,
+				mediaParams: {
+					type: 'img',
+					path: 'file:///home/taha/Downloads/IMG_20160709_211447.jpg'
+				}
 			}
 		]
 	}

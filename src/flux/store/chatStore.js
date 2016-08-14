@@ -46,12 +46,6 @@ var ChatStore = objectAssign({}, EventEmitter.prototype, {
 	getChats: function() {
 		return _chats;
 	},
-
-	selectGroup: function(groupId) {
-		if(_chats[groupId] === undefined) {
-			//var 
-		}
-	}
 });
 
 Dispatcher.register(function(action){
@@ -73,6 +67,18 @@ Dispatcher.register(function(action){
 			_selectedGroup.groupName = group.groupName;
 			_selectedGroup.groupId = group.id;
 			//console.log(_chats,_selectedGroup)
+			ChatStore.emitChange();
+			break;
+		case ActionTypes.SENDMESSAGE:
+			var temp = action.message;
+			if(action.success){
+				temp.success = true;
+				_chats[action.groupId].push(temp);
+			} else {
+				// if sending message failed
+				temp.success = false;
+				_chats[action.groupId].push(temp);
+			}
 			ChatStore.emitChange();
 			break;
 		default:

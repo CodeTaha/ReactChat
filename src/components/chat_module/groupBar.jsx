@@ -22,11 +22,15 @@ var GroupBar = React.createClass({
 	render: function() {
 		var createGroupRow = function(group) {
 			//console.log(group)
+			var active='list-group-item';
+			if(group.id===this.props.selectedGroupId){
+				active=active + ' active';
+			}
 			return (
 				<a href="#" 
 					onClick={this.props.onClick.bind(null, group.id)} 
 					key={group.id} 
-					className="list-group-item">
+					className={active}>
 						{group.groupName}
 					<span className="badge">14</span>
 				</a>

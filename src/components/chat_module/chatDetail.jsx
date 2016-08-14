@@ -1,5 +1,7 @@
 "use strict";
 var React = require('react');
+
+var ChatInput = require('./chatInput.jsx');
 var ChatDetail = React.createClass({
 	componentDidUpdate: function() {
 		//console.log("lala");
@@ -11,9 +13,29 @@ var ChatDetail = React.createClass({
 		selectedGroup: React.PropTypes.object.isRequired,
 		onChange: React.PropTypes.func.isRequired,
 		message: React.PropTypes.object.isRequired,
-		participant: React.PropTypes.object.isRequired
+		participant: React.PropTypes.object.isRequired,
+		onSend: React.PropTypes.func.isRequired,
 	},
 	render: function() {
+		var getText = function(mesg) {
+			if(mesg.media) {
+				if(mesg.mediaParams.type === 'img'){
+					return (
+						<p>
+							<img className="img-thumbnail" alt="Cinque Terre"
+								max-width="304" height="236"
+								src={mesg.mediaParams.path} 
+							/>
+							<br />
+							{mesg.text}		
+						</p>
+					);
+				}
+			}
+			return (
+				<p>{mesg.text}</p>
+			);
+		}
 		var createChatLi = function(mesg) {
 			//console.log(mesg)
 			var a = new Date(mesg.timestamp * 1000);
@@ -44,9 +66,7 @@ var ChatDetail = React.createClass({
 									{mesg.participant.name}
 								</strong>
 							</div>
-							<p>
-								{mesg.text}
-							</p>
+							{getText(mesg)}
 						</div>
 					</li>
 				);
@@ -66,9 +86,7 @@ var ChatDetail = React.createClass({
 								{time}
 							</small>
 						</div>
-						<p>
-							{mesg.text}
-						</p>
+						{getText(mesg)}
 					</div>
 				</li>
 			);
@@ -77,7 +95,7 @@ var ChatDetail = React.createClass({
 			return (<div></div>);
 		}
 		return (
-			<div className="panel panel-primary">
+			<div className="panel panel-info">
                 <div className="panel-heading">
                     <span className="glyphicon glyphicon-comment"></span> 
                     {' '+ this.props.selectedGroup.groupName}
@@ -88,7 +106,12 @@ var ChatDetail = React.createClass({
                     </ul>
                 </div>
                 <div className="panel-footer">
-                	<form>
+                	<ChatInput 
+                		onChange={this.props.onChange}
+						message={this.props.message}
+						onSend={this.props.onSend}
+                	/>
+                	{/*<form>
 	                    <div className="input-group">
 	                        <input id="btn-input" type="text" className="form-control input-sm" placeholder="Type your message here..."
 								name='message'
@@ -105,7 +128,7 @@ var ChatDetail = React.createClass({
 	                            />
 	                        </span>
 	                    </div>
-	                </form>
+	                </form>*/}
                 </div>
             </div>
 			

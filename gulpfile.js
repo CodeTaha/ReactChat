@@ -10,7 +10,10 @@ var config = {
 	paths:{
 		html: './src/*.html',
 		js: './src/**/*.js*',
-		images: './src/images/**.**',
+		images: [
+			'./src/images/**',
+			//'./src/images/chatData/**.**'
+			],
 		dist: './dist',
 		mainJs: './src/main.jsx',
 		css:[
