@@ -32,7 +32,6 @@ var GroupBar = React.createClass({
 					key={group.id} 
 					className={active}>
 						{group.groupName}
-					<span className="badge">14</span>
 				</a>
 			);
 		};

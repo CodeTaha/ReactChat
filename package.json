@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "A chat application using React",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CodeTaha/ReactChat.git"
@@ -21,6 +18,12 @@
     "url": "https://github.com/CodeTaha/ReactChat/issues"
   },
   "homepage": "https://github.com/CodeTaha/ReactChat#readme",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "automock": false
+  },
   "dependencies": {
     "bootstrap": "^3.3.7",
     "browserify": "^13.1.0",
@@ -33,17 +36,22 @@
     "gulp-open": "^2.0.0",
     "gulp-plumber": "^1.1.0",
     "jquery": "^3.1.0",
+    "keymirror": "^0.1.1",
     "object-assign": "^4.1.0",
-    "react": "^0.13.3",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
     "react-emoji": "^0.4.4",
-    "react-router": "^0.13.3",
+    "react-router": "^2.6.1",
     "reactify": "^1.1.1",
     "toastr": "^2.1.2",
     "vinyl-source-stream": "^1.1.0"
   },
   "devDependencies": {
-    "expect": "^1.20.2",
-    "mocha": "^3.0.2",
-    "react-addons-test-utils": "^15.3.0"
+    "babel-jest": "^14.1.0",
+    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-react": "^6.11.1",
+    "jest": "^14.1.0",
+    "react-addons-test-utils": "^15.3.0",
+    "react-test-renderer": "^15.3.0"
   }
 }
