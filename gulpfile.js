@@ -15,7 +15,7 @@ var config = {
 			//'./src/images/chatData/**.**'
 			],
 		dist: './dist',
-		mainJs: './src/main.jsx',
+		mainJs: './src/main.js',
 		css:[
 			'node_modules/bootstrap/dist/css/bootstrap.css',
 			'node_modules/bootstrap/dist/css/bootstrap-theme.css',
