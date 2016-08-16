@@ -148,7 +148,7 @@ var App = React.createClass({
 						<div className="col-md-8">
 							<ChatDetail 
 								selectedGroup={this.state.selectedGroup}
-								chats={this.state.chats}
+								chats={this.state.chats[this.state.selectedGroup.groupId]}
 								message={this.state.message}
 								participant={this.state.participant}
 								onChange={this.setMessageState}
@@ -161,10 +161,5 @@ var App = React.createClass({
 		);
 	}
 });
-
-/* To generate random dates*/
-var randomDate=function (start, end) {var temp = (new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))).getTime();temp = parseInt(temp/1000);return temp;}
-//randomDate(new Date(2016, 0, 1), new Date())
-
 
 module.exports = App;

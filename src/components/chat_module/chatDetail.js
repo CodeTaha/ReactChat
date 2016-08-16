@@ -13,6 +13,7 @@ var ChatDetail = React.createClass({
 	],
 	propTypes: {
 		// Checks if prop is passed by the Parent component
+		chats: React.PropTypes.array,
 		selectedGroup: React.PropTypes.object.isRequired,
 		onChange: React.PropTypes.func.isRequired,
 		message: React.PropTypes.object.isRequired,
@@ -110,7 +111,7 @@ var ChatDetail = React.createClass({
                 </div>
                 <div id="panelBody" className="panel-body">
                     <ul className="chat">
-						{this.props.chats[this.props.selectedGroup.groupId].map(createChatLi,this)}
+						{this.props.chats.map(createChatLi,this)}
                     </ul>
                 </div>
                 <div className="panel-footer">
