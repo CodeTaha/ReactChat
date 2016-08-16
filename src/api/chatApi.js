@@ -63,7 +63,7 @@ var chatApi = {
 	},
 
 	saveGroup: function(group) {
-		// Todo saveGroup and create chat data
+		// Todo saveGroup and create chat data - Option to create new group
 		//pretend an ajax call to web api is made here
 		console.log('Pretend this just saved the group to the DB via AJAX call...');
 		

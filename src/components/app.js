@@ -88,7 +88,7 @@ var App = React.createClass({
 	setMessageState: function(event) {
 		var field = event.target.name;
 		if(field==='mediaPath'){
-			console.log(event.target.files)
+			//console.log(event.target.files)
 			let reader = new FileReader();
 		    let file = event.target.files[0];
 
