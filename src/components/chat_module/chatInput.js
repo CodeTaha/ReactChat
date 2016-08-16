@@ -40,7 +40,7 @@ var ChatInput = React.createClass({
 							type="submit"
 							value="Send"
 							onClick={this.props.onSend}
-							className="btn btn-warning btn-sm" id="btn-chat"
+							className="btn btn-success btn-sm" id="btn-chat"
 						/>
 					</span>
 				</div>
