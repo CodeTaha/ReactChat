@@ -9,7 +9,7 @@ var ChatInput = React.createClass({
 		onSend: React.PropTypes.func.isRequired,
 	},
 	render: function() {
-		//console.log(this.props.message)
+		//console.log(JSON.stringify(this.props.message))
 		var attached="";
 		if(this.props.message.media){
 			attached = "File Attached: "+this.props.message.mediaParams.file.name;

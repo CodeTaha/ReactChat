@@ -15,8 +15,8 @@ var ChatList = React.createClass({
 		return (
 			<div>
 				<ul className="list-group">
-				<li className="list-group-item">Search option
-				</li>
+				{/*<li className="list-group-item">Search option
+				</li>*/}
 				<GroupBar 
 					groups={this.props.groups}
 					onClick={this.props.onClick}

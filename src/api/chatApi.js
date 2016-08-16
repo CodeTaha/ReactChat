@@ -39,7 +39,7 @@ var chatApi = {
 	getChatsById: function(groupId) {
 		//var group = _.find(groups, {id: groupId});
 		var chat = chats[groupId];
-		return _clone(chat);
+		return _clone(chat.sort(compare));
 	},
 	
 	getActiveParticipant: function() {
@@ -88,3 +88,8 @@ var chatApi = {
 };
 
 module.exports = chatApi;
+
+/* To generate random dates
+var randomDate=function (start, end) {var temp = (new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))).getTime();temp = parseInt(temp/1000);return temp;}
+//randomDate(new Date(2016, 0, 1), new Date())
+*/

@@ -78,3 +78,6 @@
     cursor: inherit;
     display: block;
 }
+.navbar-brand {
+    padding-top: 8px;
+}
