@@ -56,6 +56,7 @@ Dispatcher.register(function(action){
 			_selectedGroup = {
 				groupName: '',
 				groupId: '',
+				profile_pic: ''
 			};
 			ChatStore.emitChange();
 			break;
@@ -66,6 +67,7 @@ Dispatcher.register(function(action){
 			var group = ChatStore.getGroupById(action.groupId);
 			_selectedGroup.groupName = group.groupName;
 			_selectedGroup.groupId = group.id;
+			_selectedGroup.profile_pic = group.profile_pic;
 			//console.log(_chats,_selectedGroup)
 			ChatStore.emitChange();
 			break;

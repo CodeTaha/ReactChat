@@ -31,7 +31,9 @@ var GroupBar = React.createClass({
 					onClick={this.props.onClick.bind(null, group.id)} 
 					key={group.id} 
 					className={active}>
-						{group.groupName}
+						<img src={group.profile_pic} alt="User Avatar" className="img-circle" width="40em" height="40em" />
+						
+						{" "+group.groupName}
 				</a>
 			);
 		};

@@ -47,7 +47,7 @@ describe('Testing GroupBar', function() {
 	});
 
 	it('groupName is correct', function(){
-		expect(ReactDOM.findDOMNode(anchors[0]).textContent).toEqual('John');
+		expect(ReactDOM.findDOMNode(anchors[0]).textContent).toEqual(' John');
 	});
 
 	it('expect onCHange to called onClick', function(){

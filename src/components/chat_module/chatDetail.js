@@ -59,7 +59,7 @@ var ChatDetail = React.createClass({
 				return (
 					<li key={key} className="right clearfix">
 						<span className="chat-img pull-right">
-							<img src="http://placehold.it/50/55C1E7/fff&text=ME" alt="User Avatar" className="img-circle" />
+							<img src={mesg.participant.profile_pic} alt="User Avatar" className="img-circle" width="50em" height="50em" />
 						</span>
 						<div className="chat-body clearfix">
 							<div className="header">
@@ -80,7 +80,7 @@ var ChatDetail = React.createClass({
 				// If sent by other participants
 				<li key={key} className="left clearfix">
 					<span className="chat-img pull-left">
-						<img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" className="img-circle" />
+						<img src={mesg.participant.profile_pic} alt="User Avatar" className="img-circle" width="50em" height="50em" />
 					</span>
 					<div className="chat-body clearfix">
 						<div className="header">
@@ -105,7 +105,7 @@ var ChatDetail = React.createClass({
                 <div className="panel-heading">
                     
 					<h4>
-						<span className="glyphicon glyphicon-comment"></span> 
+						<img src={this.props.selectedGroup.profile_pic} alt="User Avatar" className="img-circle" width="40em" height="40em" /> 
 						{' '+ this.props.selectedGroup.groupName}
 					</h4>
                 </div>

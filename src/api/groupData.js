@@ -9,7 +9,8 @@ module.exports = {
 				participants.john,
 				participants.simon,
 				participants.jack
-			]
+			],
+			profile_pic:'images/profile/halloween.jpg'
 		},	
 		{
 			id: 'grp2', 
@@ -17,7 +18,8 @@ module.exports = {
 			participants: [
 				participants.me,
 				participants.john
-			]
+			],
+			profile_pic:'images/profile/cartman.jpg'
 		},	
 		{
 			id: 'dan', 
@@ -25,7 +27,8 @@ module.exports = {
 			participants: [
 				participants.me,
 				participants.dan
-			]
+			],
+			profile_pic:'images/profile/randy.jpg'
 		}
 	]
 };

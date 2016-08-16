@@ -3,27 +3,32 @@ module.exports = {
 		me: { 
 			id: 'me',
 			primary: true, 
-			name: 'Taha', 
+			name: 'Taha',
+			profile_pic:'images/profile/taha.jpg'
 		},
 		john: { 
 			id: 'john',
 			primary: false, 
-			name: 'John', 
+			name: 'John',
+			profile_pic:'images/profile/cartman.jpg' 
 		},
 		simon: { 
 			id: 'simon',
 			primary: false, 
-			name: 'Simon', 
+			name: 'Simon',
+			profile_pic:'images/profile/peter.png' 
 		},
 		jack: { 
 			id: 'jack',
 			primary: false, 
-			name: 'Jack', 
+			name: 'Jack',
+			profile_pic:'images/profile/homer.gif' 
 		},
 		dan: { 
 			id: 'dan',
 			primary: false, 
-			name: 'Dan', 
+			name: 'Dan',
+			profile_pic:'images/profile/randy.jpg'
 		}
 	}
 };
